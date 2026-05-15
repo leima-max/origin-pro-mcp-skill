@@ -32,6 +32,49 @@ Use this skill when the user wants to create, edit, style, fit, or export Origin
 6. Use `curve_fit` when fitting is requested.
 7. Use `export_graph` or `export_all_graphs`, then verify the returned file path and size.
 
+### Tool List
+
+Project:
+
+- `new_project`
+- `save_project`
+- `load_project`
+
+Worksheet and data:
+
+- `create_worksheet`
+- `set_worksheet_data`
+- `get_worksheet_data`
+- `import_csv_to_worksheet`
+- `list_worksheets`
+
+Graphing:
+
+- `create_graph`
+- `add_plot_to_graph`
+- `set_axis_labels`
+- `set_axis_range`
+- `export_graph`
+- `export_all_graphs`
+
+Styling:
+
+- `apply_publication_style`
+- `set_plot_style`
+- `set_graph_font`
+- `set_legend`
+- `set_tick_style`
+
+Analysis:
+
+- `curve_fit`
+- `list_fitting_functions`
+
+Advanced:
+
+- `run_labtalk`
+- `get_labtalk_variable`
+
 ### Safety Rules
 
 - Do not include local API keys, token files, Zotero settings, or workspace-specific MCP config in shared outputs.
@@ -70,6 +113,49 @@ Use this skill when the user wants to create, edit, style, fit, or export Origin
 5. 使用 `apply_publication_style` 完成论文图样式。
 6. 需要拟合时调用 `curve_fit`。
 7. 使用 `export_graph` 或 `export_all_graphs` 导出，并检查返回的路径和文件大小。
+
+### 工具清单
+
+项目管理：
+
+- `new_project`
+- `save_project`
+- `load_project`
+
+数据与工作表：
+
+- `create_worksheet`
+- `set_worksheet_data`
+- `get_worksheet_data`
+- `import_csv_to_worksheet`
+- `list_worksheets`
+
+绘图：
+
+- `create_graph`
+- `add_plot_to_graph`
+- `set_axis_labels`
+- `set_axis_range`
+- `export_graph`
+- `export_all_graphs`
+
+样式：
+
+- `apply_publication_style`
+- `set_plot_style`
+- `set_graph_font`
+- `set_legend`
+- `set_tick_style`
+
+分析：
+
+- `curve_fit`
+- `list_fitting_functions`
+
+高级：
+
+- `run_labtalk`
+- `get_labtalk_variable`
 
 ### 安全规则
 
