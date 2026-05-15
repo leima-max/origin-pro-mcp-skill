@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "origin-pro-mcp"
+version = "0.2.0"
+description = "MCP server for controlling OriginLab Origin Pro via COM automation"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "youngminsw" },
+    { name = "epi-opto-mentor contributors" },
+]
+keywords = ["mcp", "origin", "originlab", "originpro", "com", "automation", "plotting"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = [
+    "mcp>=1.0.0",
+    "pywin32>=306",
+    "Pillow>=10.0.0",
+]
+
+[project.scripts]
+origin-pro-mcp = "origin_pro_mcp.app:main"
+
+[project.urls]
+Homepage = "https://github.com/leima-max/origin-pro-mcp-skill"
+Repository = "https://github.com/leima-max/origin-pro-mcp-skill"
+Issues = "https://github.com/leima-max/origin-pro-mcp-skill/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/origin_pro_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/origin_pro_mcp", "skills", "README.md", "README.zh-CN.md", "SKILL.md", "pyproject.toml"]

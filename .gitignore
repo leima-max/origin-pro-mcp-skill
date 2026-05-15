@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Origin generated project/output files
+*.opj
+*.opju
+*.oggu
+*.ogg
+*.ogw
+*.ogwu
+output/
+outputs/
+tmp/
+
+# Local MCP/client configuration may contain machine-specific paths or secrets.
+config/
+mcporter.json
+.mcp.json
+
+# Local editor/system files
+.DS_Store
+Thumbs.db

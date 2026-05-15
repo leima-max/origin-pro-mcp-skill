@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "origin-pro": {
+      "command": "python",
+      "args": [
+        "-u",
+        "PATH_TO_REPO/server.py"
+      ],
+      "description": "Origin Pro MCP server via Windows COM automation"
+    }
+  }
+}
