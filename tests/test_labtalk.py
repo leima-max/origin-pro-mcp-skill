@@ -1,4 +1,7 @@
 from origin_pro_mcp.origin_connection import execute_labtalk, get_lt_var, get_lt_str
+import pytest
+
+pytestmark = pytest.mark.origin
 
 def test_execute_labtalk_simple():
     execute_labtalk("double __mcp_test = 42;")

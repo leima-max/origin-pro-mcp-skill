@@ -1,4 +1,7 @@
 from origin_pro_mcp.origin_connection import get_origin, execute_labtalk, get_lt_var
+import pytest
+
+pytestmark = pytest.mark.origin
 
 def setup_function():
     o = get_origin()

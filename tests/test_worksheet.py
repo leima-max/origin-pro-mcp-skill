@@ -1,7 +1,11 @@
 import json
 
+import pytest
+
 from origin_pro_mcp.origin_connection import get_origin
 from origin_pro_mcp.tools.worksheet import import_csv_to_worksheet, list_worksheets
+
+pytestmark = pytest.mark.origin
 
 def setup_function():
     o = get_origin()

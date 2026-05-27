@@ -1,5 +1,9 @@
 import subprocess, sys
 
+import pytest
+
+pytestmark = pytest.mark.origin
+
 def test_origin_connection():
     result = subprocess.run(
         [sys.executable, "-c",

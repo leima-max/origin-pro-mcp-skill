@@ -1,0 +1,13 @@
+interface:
+  display_name: "Origin Pro MCP"
+  short_description: "Automate Origin Pro figures and analysis"
+  default_prompt: "Use $origin-pro-mcp to create, style, fit, and export an Origin Pro publication figure."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "origin-pro"
+      description: "Local Origin Pro MCP server backed by Windows COM automation."
+
+policy:
+  allow_implicit_invocation: true

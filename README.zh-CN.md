@@ -61,13 +61,36 @@ python -m pip install -e .
 
 已清理的示例配置见 `examples/mcporter.example.json`。请将 `PATH_TO_REPO` 替换为你自己的仓库路径。
 
+## OpenClaw 配置
+
+安装 Python 包后，把 MCP server 注册到 OpenClaw：
+
+```powershell
+openclaw mcp set origin-pro '{"command":"origin-pro-mcp"}'
+openclaw mcp show origin-pro
+```
+
+如果控制台命令不在 PATH 中，可以直接指向本地 server 文件：
+
+```powershell
+openclaw mcp set origin-pro '{"command":"python","args":["-u","PATH_TO_REPO/server.py"]}'
+```
+
+为了便于发布到 ClawHub，根目录 `SKILL.md` 已补充 OpenClaw 可识别的 frontmatter，`agents/openai.yaml` 也声明了 `origin-pro` MCP 依赖，方便 UI 侧展示。
+
 ## 快速测试
 
 ```powershell
 python -m pytest -q
 ```
 
-如果当前机器没有安装 Origin Pro，依赖 Origin COM 的测试会自动跳过。如果 Origin 可用，测试会执行真实 COM 工作流。
+默认测试只验证包导入和 MCP 工具注册，不会触碰 Origin Pro。依赖 Origin COM 的真实集成测试需要显式开启：
+
+```powershell
+$env:ORIGIN_MCP_RUN_ORIGIN="1"; python -m pytest -q
+```
+
+只有在 Windows 机器已安装并启动 Origin Pro，且允许测试创建/清空临时项目时，才建议运行该集成测试。
 
 也可以只验证 MCP 工具是否完成注册：
 

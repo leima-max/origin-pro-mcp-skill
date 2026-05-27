@@ -1,3 +1,4 @@
+import pythoncom
 import win32com.client
 
 _origin = None
@@ -5,6 +6,8 @@ _origin = None
 def get_origin():
     global _origin
     if _origin is None:
+        # Ensure COM apartment is initialized for this Python thread/process.
+        pythoncom.CoInitialize()
         _origin = win32com.client.Dispatch("Origin.ApplicationSI")
     return _origin
 

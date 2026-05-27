@@ -1,3 +1,17 @@
+---
+name: origin-pro-mcp
+description: "Control OriginLab Origin Pro through the origin-pro MCP server for worksheets, graphs, publication styling, fitting, LabTalk, and verified figure export. Use when the user wants Origin Pro/OriginLab automation, scientific plotting in Origin, or OpenClaw MCP setup for Origin."
+homepage: https://github.com/leima-max/origin-pro-mcp-skill
+metadata:
+  {
+    "openclaw":
+      {
+        "os": ["win32"],
+        "requires": { "bins": ["python"] },
+      },
+  }
+---
+
 # Origin Pro MCP Skill / Origin Pro MCP 技能
 
 ## English
@@ -21,6 +35,39 @@ Use this skill when the user wants to create, edit, style, fit, or export Origin
 - Package installed with `python -m pip install -e .`.
 - MCP server configured as `origin-pro`.
 - Origin Pro started before COM-dependent operations.
+
+### OpenClaw Setup
+
+Install the package from the checked-out skill folder:
+
+```powershell
+python -m pip install -e .
+```
+
+Register the MCP server with OpenClaw:
+
+```powershell
+openclaw mcp set origin-pro '{"command":"origin-pro-mcp"}'
+openclaw mcp show origin-pro
+```
+
+If the console command is not on PATH, register the local server file instead:
+
+```powershell
+openclaw mcp set origin-pro '{"command":"python","args":["-u","PATH_TO_REPO/server.py"]}'
+```
+
+Run the fast package check without Origin:
+
+```powershell
+python -m pytest -q
+```
+
+Run real Origin COM integration tests only when Origin Pro is installed, started, and disposable test projects are acceptable:
+
+```powershell
+$env:ORIGIN_MCP_RUN_ORIGIN="1"; python -m pytest -q
+```
 
 ### Default Workflow
 

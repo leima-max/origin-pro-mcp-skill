@@ -61,13 +61,36 @@ Or run the local server file directly:
 
 A sanitized example is available at `examples/mcporter.example.json`.
 
+## OpenClaw Setup
+
+After installing the Python package, register the MCP server in OpenClaw:
+
+```powershell
+openclaw mcp set origin-pro '{"command":"origin-pro-mcp"}'
+openclaw mcp show origin-pro
+```
+
+If the console script is not available on PATH, point OpenClaw at the checked-out server file:
+
+```powershell
+openclaw mcp set origin-pro '{"command":"python","args":["-u","PATH_TO_REPO/server.py"]}'
+```
+
+For ClawHub publication, the root `SKILL.md` contains OpenClaw-readable frontmatter and `agents/openai.yaml` declares the `origin-pro` MCP dependency for UI surfaces.
+
 ## Quick Smoke Test
 
 ```powershell
 python -m pytest -q
 ```
 
-On machines without Origin Pro, Origin-dependent tests are skipped. On a Windows machine with Origin Pro available, the integration tests exercise the real COM workflow.
+The default test run verifies package import and MCP tool registration without touching Origin Pro. Origin-dependent COM tests are skipped unless you opt in:
+
+```powershell
+$env:ORIGIN_MCP_RUN_ORIGIN="1"; python -m pytest -q
+```
+
+Use the opt-in integration run only on a Windows machine with Origin Pro installed and started.
 
 You can also verify tool registration without starting Origin:
 

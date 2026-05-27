@@ -1,10 +1,15 @@
 """End-to-end test: create data, plot, style, fit, export."""
-import win32com.client
-from origin_pro_mcp.tools.graph import export_graph
 import os
 
+import pytest
+
+from origin_pro_mcp.origin_connection import get_origin
+from origin_pro_mcp.tools.graph import export_graph
+
+pytestmark = pytest.mark.origin
+
 def test_full_workflow():
-    o = win32com.client.gencache.EnsureDispatch("Origin.ApplicationSI")
+    o = get_origin()
     o.NewProject()
 
     # 1. Create workbook with data
