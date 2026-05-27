@@ -13,7 +13,19 @@ Origin Pro MCP 技能包是一个面向 Windows + OriginLab Origin Pro 的 MCP s
 - 使用 Origin `expGraph` 导出图片，并校验文件是否真实生成
 - CSV 导入会尊重指定 workbook 名称，避免 Origin `impasc` 自动生成 sparkline 图页的副作用
 - 内置 `skills/publication-figure.md` 论文图工作流
+- 面向材料表征扩展 Tauc/吸收、XRD、Raman、PL、XPS/UPS、TEM/FFT、AFM、Hall 和迁移率图模板
+- 面向光电探测器扩展 I-V、整流比、EQE、响应度、D*、噪声、响应时间、光强依赖和器件统计模板
 - 内置 pytest 测试；无 Origin 环境会自动跳过 Origin COM 测试
+
+## 材料与光电探测器工作流
+
+`skills/publication-figure.md` 已从通用 Origin 绘图流程扩展为科研论文图模板库：
+
+- 通用材料表征：吸收/Tauc、XRD/织构、Raman/PL/XPS/UPS 光谱、显微统计、FFT/取向剖面、AFM 粗糙度、Hall/输运图。
+- 光电探测器指标：I-V 半对数图、整流比、光电流、EQE、响应度、探测率、实测/估算噪声、NEP、响应时间、光强依赖和跨器件统计。
+- 不绑定特定材料体系的光电探测器流程：显式记录偏压约定、活性面积、光功率、噪声定义、响应时间定义，以及结构-性能关联。
+
+每个技术图模板都包含目标、操作步骤、预期结果、失败判据和下一步，确保导出的 Origin 图不仅好看，也能对应到物理证据链。
 
 ## 环境要求
 

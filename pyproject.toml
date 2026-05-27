@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "origin-pro-mcp"
-version = "0.2.1"
+version = "0.2.2"
 description = "MCP server for controlling OriginLab Origin Pro via COM automation"
 readme = "README.md"
 license = "MIT"
@@ -13,7 +13,7 @@ authors = [
     { name = "youngminsw" },
     { name = "epi-opto-mentor contributors" },
 ]
-keywords = ["mcp", "openclaw", "clawhub", "origin", "originlab", "originpro", "com", "automation", "plotting"]
+keywords = ["mcp", "openclaw", "clawhub", "origin", "originlab", "originpro", "com", "automation", "plotting", "materials", "photodetector", "tauc", "xrd", "eqe", "detectivity"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Operating System :: Microsoft :: Windows",

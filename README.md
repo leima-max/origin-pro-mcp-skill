@@ -13,7 +13,19 @@ This repository is a sanitized, reusable package. It does not contain personal A
 - File-verified graph export using Origin `expGraph`
 - CSV import that respects the requested Origin workbook name and avoids Origin `impasc` side effects
 - Publication figure workflow in `skills/publication-figure.md`
+- Materials-science figure templates for Tauc/absorption, XRD, Raman, PL, XPS/UPS, TEM/FFT, AFM, Hall, and mobility data
+- Photodetector figure templates for I-V, rectification, EQE, responsivity, D*, noise, response time, light-intensity dependence, and device statistics
 - Pytest coverage with Origin-aware skip behavior for machines without Origin installed
+
+## Materials and Photodetector Workflows
+
+`skills/publication-figure.md` extends the general Origin workflow into a reusable scientific plotting playbook:
+
+- General materials characterization: absorption/Tauc, XRD/texture, Raman/PL/XPS/UPS spectra, microscopy statistics, FFT/orientation profiles, AFM roughness, and Hall/transport plots.
+- Photodetector metrics: I-V semilog, rectification ratio, photocurrent, EQE, responsivity, detectivity, measured/estimated noise, NEP, response time, power dependence, and cross-device statistics.
+- Device-agnostic photodetector workflow: bias convention, active area, optical power, noise definition, response-time definition, and structure-performance linkage are kept explicit for any detector stack.
+
+Each technical figure recipe includes the goal, operation steps, expected result, failure criterion, and next step so the exported Origin graph stays tied to a physical evidence chain.
 
 ## Requirements
 

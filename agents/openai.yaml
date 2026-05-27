@@ -1,7 +1,7 @@
 interface:
   display_name: "Origin Pro MCP"
-  short_description: "Automate Origin Pro figures and analysis"
-  default_prompt: "Use $origin-pro-mcp to create, style, fit, and export an Origin Pro publication figure."
+  short_description: "Automate Origin Pro worksheets, publication figures, materials characterization plots, and photodetector metrics."
+  default_prompt: "Use $origin-pro-mcp for Origin Pro automation. Read skills/publication-figure.md before final exports, especially for Tauc/XRD/Raman/PL/XPS/TEM/AFM/Hall materials figures or I-V/EQE/responsivity/D*/noise/response-time photodetector figures."
 
 dependencies:
   tools:
