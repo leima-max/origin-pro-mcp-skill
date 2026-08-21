@@ -17,11 +17,16 @@ COLOR_MAP = {
 def _get_plot_names(graph_name: str) -> list:
     """Get actual plot names from COM DataPlots."""
     o = get_origin()
-    gl = o.FindGraphLayer(f"[{graph_name}]Layer1")
-    if not gl:
+    try:
+        gl = o.FindGraphLayer(f"[{graph_name}]Layer1")
+        if not gl:
+            return []
+        dp = gl.DataPlots
+        if dp is None:
+            return []
+        return [dp.Item(i).Name for i in range(dp.Count)]
+    except Exception:
         return []
-    dp = gl.DataPlots
-    return [dp.Item(i).Name for i in range(dp.Count)]
 
 
 def _gl_execute(graph_name: str, script: str) -> bool:
@@ -239,6 +244,13 @@ def apply_publication_style(
     _position_legend(graph_name, legend_position)
 
     styled = len(plot_names)
+    if styled == 0:
+        return (
+            f"Publication style applied to {graph_name} with WARNING: "
+            f"0 plots found — axis/frame/tick styling was applied, but no "
+            f"data plot exists in {graph_name}. Create the graph with data "
+            f"first (create_graph / add_plot_to_graph)."
+        )
     return (
         f"Publication style applied to {graph_name}: "
         f"{styled} plots styled, Arial bold labels, "
