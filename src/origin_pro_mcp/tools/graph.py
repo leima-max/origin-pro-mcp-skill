@@ -89,18 +89,32 @@ def create_graph(
     """
     o = get_origin()
     ptype = PLOT_TYPES.get(plot_type, 202)
-    name = o.CreatePage(3, graph_name, "origin")
+
+    # FIX: COM CreatePage(3, name, "origin") creates a page where plotxy
+    # cannot resolve [name]Layer1, so the plot silently never appears.
+    # Use LabTalk to create a real graph window instead. NOTE: in COM
+    # automation mode Origin ignores window renaming (win -rn / page.name$
+    # / win -t graph <name> all fail), so we always use the auto-assigned
+    # window name (GraphN) and return it to the caller. We must also
+    # route plotxy to Layer1 explicitly with ogl:=, otherwise plotxy
+    # creates a new Layer2 and leaves Layer1 empty (breaking
+    # FindGraphLayer("[Graph1]Layer1") for subsequent tools).
+    if not execute_labtalk("win -t graph;"):
+        return "Failed to create graph window"
+    actual_name = o.ActivePage.Name
+    execute_labtalk(f"win -a {actual_name};")
 
     data_ref = f"[{data_book}]{data_sheet}!({x_col},{y_col})"
     if y_error_col > 0:
         data_ref = f"[{data_book}]{data_sheet}!({x_col},{y_col},{y_error_col})"
 
-    execute_labtalk(f"plotxy iy:={data_ref} plot:={ptype} ogl:=[{name}]Layer1;")
+    if not execute_labtalk(f"plotxy iy:={data_ref} plot:={ptype} ogl:=[{actual_name}]Layer1;"):
+        return f"Failed to plot data into {actual_name}: plotxy returned false"
 
     if title:
         execute_labtalk(f'label -n title -s "{title}"; title.x = 50; title.y = 95;')
 
-    return f"Created graph: {name} ({plot_type})"
+    return f"Created graph: {actual_name} ({plot_type})"
 
 @mcp.tool()
 def add_plot_to_graph(
@@ -131,7 +145,12 @@ def add_plot_to_graph(
     if y_error_col > 0:
         data_ref = f"[{data_book}]{data_sheet}!({x_col},{y_col},{y_error_col})"
 
-    execute_labtalk(f"plotxy iy:={data_ref} plot:={ptype} ogl:=[{graph_name}]Layer1;")
+    # FIX: in Origin 2024 COM automation, the LabTalk `addplot` command
+    # is blocked (returns false), but `plotxy` with explicit ogl:=Layer1
+    # APPENDS a new series to Layer1 instead of replacing it. So we
+    # use plotxy+ogl for add too.
+    if not execute_labtalk(f"win -a {graph_name}; plotxy iy:={data_ref} plot:={ptype} ogl:=[{graph_name}]Layer1;"):
+        return f"Failed to add plot to {graph_name}: plotxy returned false"
     return f"Added {plot_type} plot to {graph_name}"
 
 @mcp.tool()
@@ -152,7 +171,9 @@ def set_axis_labels(
     Returns:
         Success message
     """
-    execute_labtalk(f"win -a {graph_name};")
+    # FIX: rebuild labels first so stale axis titles from previous
+    # styling (e.g. apply_publication_style) do not stack/overlap.
+    execute_labtalk(f"win -a {graph_name}; label -r;")
     if x_label:
         execute_labtalk(f'xb.text$ = "{x_label}";')
     if y_label:
