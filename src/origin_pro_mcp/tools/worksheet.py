@@ -70,9 +70,18 @@ def get_worksheet_data(book_name: str, sheet_name: str) -> str:
     """
     o = get_origin()
     target = f"[{book_name}]{sheet_name}"
-    data = o.GetWorksheet(target)
+    try:
+        data = o.GetWorksheet(target)
+    except Exception as e:
+        return json.dumps({"error": f"Failed to read worksheet {target}: {e}"})
+
     if data is None:
         return json.dumps({"error": f"Worksheet {target} not found"})
+
+    # FIX: Origin COM GetWorksheet may return a bare scalar (single-cell
+    # sheet) instead of a 2D array — normalize it before len()/indexing.
+    if not isinstance(data, (list, tuple)):
+        data = [[data]]
 
     if len(data) == 0:
         return json.dumps({"columns": []})
